@@ -1,0 +1,20 @@
+.text {
+   overflow: hidden;
+   text-overflow: ellipsis;
+   display: -webkit-box;
+   -webkit-line-clamp: 3; /* number of lines to show */
+   -webkit-box-orient: vertical;
+   width: 350px;
+}
+.edit-modal {
+   width: 900px !important;
+   .modal-body {
+      height: 500px !important;
+      overflow: auto !important;
+   }
+}
+@media (max-width: 768px) {
+   .edit-modal {
+      width: 100% !important;
+   }
+}

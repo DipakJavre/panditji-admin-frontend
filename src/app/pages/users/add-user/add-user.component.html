@@ -1,0 +1,93 @@
+<div class="row">
+    <div class="col-md-10">
+        <form #addUserForm="ngForm" (ngSubmit)="addUserForm.form.valid && addUser()">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <h5>Add New User</h5>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="form-label">
+                                    <label for="role"><b> User Role</b></label>
+                                </div>
+                                <nb-select class="w-100"[(ngModel)]="dataModel.role" name="role" id="role"  fullWidth placeholder="Select user role" [(selected)]="selectedItem">
+                                    <nb-option *ngFor="let r of rolesList" [value]="r.id">{{ r.name }}
+                                    </nb-option>
+                                </nb-select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="form-label">
+                                    <label for="fullName"><b> Full Name</b></label>
+                                </div>
+                                <input type="text" nbInput name="fullName" id="fullName" [(ngModel)]="dataModel.fullName" placeholder="Full name" fullWidth nbInput />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="form-label">
+                                    <label for="profileImg"><b> Profile image</b></label>
+                                </div>
+                                <input type="file" hidden #file />
+                                <button nbButton size="small" name="profileImg" status="primary" (click)="file.click()">
+                  Select profile image
+                </button>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="form-label">
+                                    <label for="phone"><b> Phone number</b></label>
+                                </div>
+                                <input type="text" [(ngModel)]="dataModel.phone" id="phone" name="phone" placeholder="Phone Number" fullWidth nbInput />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="form-label">
+                                    <label for="email"><b> Email Address</b></label>
+                                </div>
+                                <input type="text" [(ngModel)]="dataModel.email" id="email" name="email" placeholder="Email Address" nbInput fullWidth class="form-control" />
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="form-label">
+                                    <label for="password"><b> Password</b></label>
+                                </div>
+                                <input type="password" name="password" id="password" [(ngModel)]="dataModel.password" placeholder="Your password" fullWidth nbInput />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="form-label">
+                                    <label for="confirmPassword"><b> Confirm Password</b></label>
+                                </div>
+                                <input type="password" name="confirmPassword" id="confirmPassword" [(ngModel)]="dataModel.confirmPassword" placeholder="Confirm password" fullWidth nbInput />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="form-label">
+                                    <label for="isActive"><b> Is Active</b></label>
+                                </div>
+                                <nb-checkbox id="isActive" name="isActive" [(ngModel)]="dataModel.isActive" (checkedChange)="toggle($event)">Is Active</nb-checkbox>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer text-right">
+                    <button nbButton status="basic">Clear</button>&nbsp;
+                    <button nbButton status="primary">Add User</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,61 @@
+<div class="row">
+    <form #addPoojaForm="ngForm" (ngSubmit)="addPoojaForm.form.valid && addArticle()">
+        <div [ngClass]="(!dataModel.id)?'col-md-10':'col-md-12'">
+            <div class="card">
+                <div class="card-header" *ngIf="!dataModel.id">
+                    <div class="card-title">
+                        <h6>{{dataModel.id ?'Update':'Add'}} New Article</h6>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="form-label">
+                                    <label for="PoojaName"><b> Article Title</b></label>
+                                </div>
+                                <input type="text" [(ngModel)]="dataModel.name" #restaurantName id="poojaName"
+                                    name="poojaName" placeholder="Article Title" fullWidth nbInput />
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div class="form-label">
+                                    <label for="content"><b> Article Description</b></label>
+                                </div>
+                                <ckeditor [editor]="Editor" [(ngModel)]="dataModel.content" name="content" id="content">
+                                </ckeditor>
+
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="form-label">
+                                    <label for="image"><b> Select Image</b></label>
+                                </div>
+                                <input type="file" fullWidth (change)="onFileChange($event)" nbInput #file hidden />
+                                <button nbButton *ngIf="!imgURL" status="info" id="image" class="btn btn-primary btn-sm"
+                                    type="button" (click)="file.click()">
+                                    Select File
+                                </button>
+                                <img *ngIf="imgURL" src="{{imgURL}}" style="cursor: pointer;" (click)="file.click()"
+                                    width="200px">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="col-md-12 text-right">
+                            <button nbButton status="basic" type="button" type="button"
+                                (click)="reset()">Reset</button>&nbsp;
+                            <button nbButton type="submit" status="info"> {{dataModel.id ?'Update':'Add'}}
+                                Article</button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

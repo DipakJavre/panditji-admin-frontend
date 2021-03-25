@@ -1,0 +1,93 @@
+<div class="container-fluid">
+
+    <div class="card" style="margin-top: 20px; ">
+
+        <div class="card-header">
+            <div class="card-title">
+                <h3>Pooja List</h3>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive m-t-30" style="background-color: #FFF;">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Sr No</th>
+                            <th>Pooja Name</th>
+                            <th>Content</th>
+                            <th>Image</th>
+                            <th colspan="2">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let d of poojaList;let i=index">
+                            <td>{{i+1}}</td>
+                            <td>{{d.name}}</td>
+                            <td>
+                                <div class="content" [innerHtml]="d.content"></div>
+                            </td>
+                            <td>
+                                <img [src]="d.photo"
+                                    onError="this.src='https://code.recuweb.com/c/u/3a09f4cf991c32bd735fa06db67889e5/2018/08/wordpress-photo-gallery-plugins1.png'"
+                                    alt="" style="width: 250px;">
+                            </td>
+                            <td>
+                                <button nbButton size="small" status="info" (click)="onEdit(editDialog,d)"><span
+                                        class="fa fa-edit"></span> &nbsp;
+                                    EDIT</button>
+                            </td>
+                            <td>
+                                <button nbButton size="small" status="danger"
+                                    (click)="onDeleteConfirm(dialog,d.id)"><span class="fa fa-trash"></span> &nbsp;
+                                    Delete</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #dialog let-ref="dialogRef">
+    <div class="delete-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                Confirm
+            </div>
+            <div class="modal-body">
+                <div>
+                    <p>Are you sure you want to delete this Pooja?</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button nbButton status="default" shape="semi-round" (click)="closeModel()">
+                    Cancel
+                </button>
+                <button status="danger" nbButton shape="semi-round" (click)="deletePooja()">
+                    Delete
+                </button>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #editDialog let-ref="dialogRef">
+    <div class="delete-modal">
+        <div class="modal-content edit-modal">
+            <div class="modal-header">
+                Update Pooja
+            </div>
+            <div class="modal-body">
+                <div *ngIf="editData">
+                    <ngx-add-pooja [data]="editData"></ngx-add-pooja>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button nbButton status="default" shape="semi-round" (click)="closeModel()">
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+</ng-template>

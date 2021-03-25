@@ -1,0 +1,283 @@
+<div class="row">
+    <form #addRestaurantForm="ngForm" (ngSubmit)="addRestaurantForm.form.valid && addResaurant(dialog)">
+        <div class="col-md-10">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <h6>Add New Restaurant</h6>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="form-label">
+                                    <label for="restaurantName"><b> Resturant Name</b></label>
+                                </div>
+                                <input type="text" [(ngModel)]="dataModel.restaurantName" #restaurantName
+                                    id="restaurantName" name="restaurantName" placeholder="Resturrant name" fullWidth
+                                    nbInput />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="form-label">
+                                    <label for=""><b> Resturant Owner</b></label>
+                                </div>
+                                <nb-select class="w-100" [(ngModel)]="dataModel.restaurantOwner" name="restaurantOwner"
+                                    id="restaurantOwner" fullWidth placeholder="Select Showcase"
+                                    [(selected)]="selectedItem">
+                                    <nb-option *ngFor="let r of owner" [value]="r.id">{{ r.name }}
+                                    </nb-option>
+                                </nb-select>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <div class="form-label">
+                                    <label for="restaurantDescription"><b> Resturant Description</b></label>
+                                </div>
+                                <textarea type="text" name="restaurantDescription" id="restaurantDescription"
+                                    [(ngModel)]="dataModel.restaurantDescription" placeholder="Resturrant description"
+                                    fullWidth nbInput rows="5"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="form-label">
+                                    <label for="image"><b> Select Restaurant Image</b></label>
+                                </div>
+                                <input type="file" fullWidth (change)="onFileChange($event)" nbInput #file hidden />
+                                <button nbButton *ngIf="!imgURL" status="info" id="image" class="btn btn-primary btn-sm"
+                                    type="button" (click)="file.click()">
+                                    Select File
+                                </button>
+                                <img *ngIf="imgURL" src="{{imgURL}}" style="cursor: pointer;" (click)="file.click()"
+                                    width="200px">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="form-label">
+                                    <label for="description"><b> Subscription</b></label>
+                                </div>
+                                <input nbInput placeholder="Pick Date" id="description" name="description"
+                                    [(ngModel)]="dataModel.subscription" [max]="today" fullWidth
+                                    [nbDatepicker]="dateTimePicker" />
+                                <nb-datepicker #dateTimePicker fullWidth [min]="today"></nb-datepicker>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="form-label">
+                                    <label for="mobile"><b> Mobile Number</b></label>
+                                </div>
+                                <input type="text" name="mobile" id="mobile" [(ngModel)]="dataModel.mobile"
+                                    placeholder="Mobile number" fullWidth nbInput />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="form-label">
+                                    <label for=""><b> Alternative Mobile Number</b></label>
+                                </div>
+                                <input type="text" name="alternativeNumber" id="alternativeNumber"
+                                    [(ngModel)]="dataModel.alternativeNumber" placeholder="Alternative number" fullWidth
+                                    nbInput />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="form-label">
+                                    <label for="email"><b> Email</b></label>
+                                </div>
+                                <input type="text" name="email" id="email" [(ngModel)]="dataModel.email"
+                                    placeholder="Email Address" fullWidth nbInput />
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="form-group">
+                                <div class="form-label">
+                                    <label for="fullAddress"><b> Full Address</b></label>
+                                </div>
+                                <textarea type="text" name="fullAddress" id="fullAddress" #fullAddress
+                                    [(ngModel)]="dataModel.fullAddress" placeholder="Full address" fullWidth nbInput
+                                    rows="5"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <div class="form-label">
+                                    <label for="rating"><b> Rating</b></label>
+                                </div>
+                                <input type="text" name="rating" id="rating" #rating [(ngModel)]="dataModel.rating"
+                                    placeholder="Rating" fullWidth nbInput />
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <div class="form-label">
+                                    <label for="approxDelivery"><b> Approx delivery time (in min)</b></label>
+                                </div>
+                                <input type="text" name="approxDelivery" id="approxDelivery" #approxDelivery
+                                    [(ngModel)]="dataModel.approxDelivery" placeholder=" Approx delivery time (in min)"
+                                    fullWidth nbInput />
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <div class="form-label">
+                                    <label for="approxPrice"><b> Approx price for two people</b></label>
+                                </div>
+                                <input type="text" name="approxPrice" #approxPrice id="approxPrice"
+                                    [(ngModel)]="dataModel.approxPrice" placeholder="Approx price for two people"
+                                    fullWidth nbInput />
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <div class="form-label">
+                                    <label for="pincode"><b> Pincode</b></label>
+                                </div>
+                                <input type="text" name="pincode" #pincode id="pincode" [(ngModel)]="dataModel.pincode"
+                                    placeholder="Pincode" fullWidth nbInput />
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <div class="form-label">
+                                    <label for="latitude"><b> Latitude</b></label>
+                                </div>
+                                <input type="text" name="latitude" id="latitude" #latitude
+                                    [(ngModel)]="dataModel.latitude" placeholder="Latitude" fullWidth nbInput />
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <div class="form-label">
+                                    <label for="longitude"><b> Longitude</b></label>
+                                </div>
+                                <input type="text" name="longitude" id="longitude" #longitude
+                                    [(ngModel)]="dataModel.longitude" placeholder="Longitude" fullWidth nbInput />
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <div class="form-label">
+                                    <label for=""><b> Commission Rate %</b></label>
+                                </div>
+                                <input type="text" name="commissionRate" id="commissionRate" #commissionRate
+                                    [(ngModel)]="dataModel.commissionRate" placeholder="Commission Rate" fullWidth
+                                    nbInput />
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <div class="form-label">
+                                    <label for="licenceCode"><b> Licence Code</b></label>
+                                </div>
+                                <input type="text" name="licenceCode" #licenceCode id="licenceCode"
+                                    [(ngModel)]="dataModel.licenceCode" placeholder="Licence Code" fullWidth nbInput />
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <div class="form-label">
+                                    <label for=""><b> Restauarant Charges</b></label>
+                                </div>
+                                <input type="text" name="restaurantCharge" #restaurantCharge id="restaurantCharge"
+                                    [(ngModel)]="dataModel.restaurantCharge" placeholder="Restaurant Charge" fullWidth
+                                    nbInput />
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <div class="form-label">
+                                    <label for="deliveryRadius"><b> Delivery Radius in KM</b></label>
+                                </div>
+                                <input type="text" name="deliveryRadius" id="deliveryRadius" #deliveryRadius
+                                    [(ngModel)]="dataModel.deliveryRadius" placeholder="Delivery Radius in KM" fullWidth
+                                    nbInput />
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <div class="form-label">
+                                    <label for="gst"><b> GSTIN Number</b></label>
+                                </div>
+                                <input type="text" name="gst" id="gst" [(ngModel)]="dataModel.gst"
+                                    placeholder="GSTIN Number" fullWidth nbInput />
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-2 chk-box" *ngFor="let c of checkBoxList">
+                                    <nb-checkbox (checkedChange)="toggle($event,c)" name="{{c.key}}" id="{{c.key}}"
+                                        [(ngModel)]="dataModel[c.key]"><b> {{ c.label }}</b>
+                                    </nb-checkbox>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="col-md-12 text-right">
+                            <button nbButton status="basic" type="button" (click)="reset()"
+                                type="button">Reset</button>&nbsp;
+                            <button nbButton type="submit" status="info">Add Restaurant</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<ng-template #dialog let-ref="dialogRef">
+    <div class="delete-modal">
+        <div class="modal-content modal-md">
+            <div class="modal-header">
+                Generate QR Code
+            </div>
+            <div class="modal-body">
+                <div class="qr-code-dialog">
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <p><strong>Restaurant Link :</strong></p>
+                            </div>
+                            <div class="col-md-9">
+                                <!-- <p>{{host}}/{{dataModel['restaurantName'].replace(' ', '-')}}</p> -->
+                                <p>google.com</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <p><strong> QR Code :</strong></p>
+                            </div>
+                            <div class="col-md-9">
+                                <!-- <button class="modal-btn" nbButton status="primary" (click)="generateCode()"
+                                    shape="semi-round">
+                                    Generate QR Code
+                                </button> -->
+
+                                <qrcode [qrdata]="host" [width]="256" [errorCorrectionLevel]="'M'" id="qrcode"></qrcode>
+                                <button nbButton shape="semi-round" (click)="downloadCode()">
+                                    Download QR Code
+                                </button>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button nbButton shape="semi-round" (click)="closeModel()">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+</ng-template>

@@ -1,0 +1,42 @@
+<div class="container-fluid">
+
+    <div class="card" style="margin-top: 20px; ">
+        <div class="card-header">
+            <div class="card-title">
+                <h3>Restaurant List</h3>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive m-t-30" style="background-color: #FFF;">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Sr No</th>
+                            <th>Restaurant Name</th>
+                            <th>Restaurant Owner</th>
+                            <th>Email</th>
+                            <th>Restaurant Photo</th>
+                            <th>QRCode</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let d of restaurantList;let i=index">
+                            <td>{{i+1}}</td>
+                            <td>{{d.resturant_name}}</td>
+                            <td>{{d.resturant_owner_id}}</td>
+                            <td>{{d.restaurant_email}}</td>
+                            <td>{{d.restaurant_Image}}</td>
+                            <td>
+                                <div *ngIf="d.restaurant_link">
+                                    <qrcode [qrdata]="d.restaurant_link" [width]="120" [errorCorrectionLevel]="'M'"
+                                        id="qrcode">
+                                    </qrcode>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

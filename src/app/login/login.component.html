@@ -1,0 +1,41 @@
+<h1 id="title" class="title">Login</h1>
+<p class="sub-title">Welcome back ! Log in with your email.</p>
+
+<form aria-labelledby="title" #f="ngForm" (ngSubmit)="f.form.valid && login()">
+    <div class="form-control-group">
+        <label class="label" for="input-email">Email address:</label>
+        <!-- <input nbInput fullWidth type="text" placeholder="Email Address" #email="ngModel" required
+            pattern="^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$" name="email"
+            [(ngModel)]="dataModel.email" /> -->
+        <input nbInput fullWidth type="text" placeholder="Email Address" #email="ngModel" name="email"
+            [(ngModel)]="dataModel.email" />
+
+    </div>
+    <div class="validation" *ngIf="(email.touched && !email.valid) || (f.submitted && !email.valid)">
+        <p>Email is required</p>
+    </div>
+    <div class="validation" *ngIf="email.errors?.pattern">
+        <p>Please enter valid email</p>
+    </div>
+
+    <div class="form-control-group">
+        <span class="label-with-link">
+            <label class="label" for="input-password">Password:</label>
+        </span>
+        <input nbInput fullWidth type="password" #password="ngModel" required name="password"
+            [(ngModel)]="dataModel.password" placeholder="Password" />
+    </div>
+    <div class="validation" *ngIf="
+      (password.touched && !password.valid) || (f.submitted && !password.valid)
+    ">
+        <p>Password is required</p>
+    </div>
+
+    <button nbButton fullWidth status="primary" size="large" type="submit">
+        Log In
+    </button>
+</form>
+
+<section class="another-action" aria-label="Register">
+    <!-- Don't have an account? <a class="text-link" routerLink="">Register</a> -->
+</section>
